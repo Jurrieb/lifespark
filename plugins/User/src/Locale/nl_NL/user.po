@@ -1,0 +1,18 @@
+msgid "Name"
+msgstr "Naam"
+
+msgid "Email"
+msgstr "Emailadres"
+
+msgid "Password"
+msgstr "Wachtwoord"
+
+msgid "Password confirm"
+msgstr "Wachtwoord herhalen"
+
+msgid "Login"
+msgstr "Inloggen"
+
+msgid "Register"
+msgstr "Registreren"
+
