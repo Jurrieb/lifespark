@@ -8,33 +8,44 @@ class UsersTable extends Table
 {
     public function validationLogin(Validator $validator)
     {
-		$validator->notEmpty('email');
-		$validator->notEmpty('password');
-        return $validator;
+        return $validator
+            ->notEmpty('email')
+            ->notEmpty('password');
     }
 
     public function validationRegister(Validator $validator)
     {
-		$validator->notEmpty('email');
-		$validator->notEmpty('password');
-
         return $validator
             ->notEmpty('name')
+            ->notEmpty('email')
             ->notEmpty('password')
             ->notEmpty('passwordConfirm')
-            ->notEmpty('email')
             ->add('email', 'validFormat', [
                 'rule' => 'email'])
             ->add('email', [
-                'unique' => ['rule' => 'validateUnique', 'provider' => 'table']
+                'unique' => [
+                    'rule' => 'validateUnique',
+                    'provider' => 'table'
+                ]
             ])
             ->add('password', 'custom', [
                 'rule' => function ($value, $context) {
-                    if($value === $context['data']['passwordConfirm']) {
+                    if($value == $context['data']['password_confirm']) {
                         return true;
                     }
                   return false;
             }]);
-        return $validator;
+    }
+
+    public function initialize(array $config)
+    {
+        $this->addBehavior('Timestamp', [
+            'events' => [
+                'Model.beforeSave' => [
+                    'created_at' => 'new',
+                    'modified_at' => 'always'
+                ]
+            ]
+        ]);
     }
 }
