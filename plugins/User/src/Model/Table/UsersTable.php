@@ -3,6 +3,8 @@ namespace User\Model\Table;
 
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
+use Cake\Event\Event;
+use ArrayObject;
 
 class UsersTable extends Table
 {
@@ -35,6 +37,46 @@ class UsersTable extends Table
                     }
                   return false;
             }]);
+    }
+
+    public function identify($data = []){
+        if(isset($data['email']) && isset($data['password'])){
+            $salt = $this->find()
+                ->where(['Users.email' => $data['email']])
+                ->select(['Users.password_salt'])
+                ->first();
+            
+            if(isset($salt->password_salt) && !empty($salt->password_salt)){
+                $user = $this->find()
+                ->where([
+                    'Users.email' => $data['email'],
+                    'Users.password' => SHA1($data['password'] . $salt->password_salt)
+               ])->select([
+                   'name',
+                   'email',
+                   'created_at',
+                   'modified_at'
+                ])
+               ->first();
+               if($user){
+                   return $user;
+               }
+            }
+        }
+        return false;
+    }
+
+    private function generateSalt()
+    {
+        return uniqid(mt_rand(), true);
+    }
+
+    public function beforeSave (\Cake\Event\Event $event, \Cake\ORM\Entity $entity, ArrayObject $options)
+    {
+        if(isset($entity->password)){
+            $entity->password_salt = $this->generateSalt();
+            $entity->password = SHA1($entity->password . $entity->password_salt);
+        }
     }
 
     public function initialize(array $config)

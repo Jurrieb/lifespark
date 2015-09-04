@@ -11,7 +11,12 @@ class UsersController extends AppController
         $user = $this->Users->newEntity($this->request->data());
         if ($this->request->is('post')) {
             if (!$user->errors()) {
-
+                $userData = $this->Users->identify($this->request->data);
+                if($userData) {
+                    $this->Flash->success(__d('user', 'Welcome {0}', [$userData->name]));
+                } else {
+                  $this->Flash->error(__d('user', 'The given combination of email and password is invalid'));
+                }
             }
         }
         $this->set('user', $user);
@@ -22,7 +27,13 @@ class UsersController extends AppController
         $user = $this->Users->newEntity($this->request->data());
         if ($this->request->is('post')) {
             if (!$user->errors()) {
-                $this->Users->save($user);
+                if($this->Users->save($user)){
+                    $this->Flash->success(__d('user', '{0} youre account has been registerd', [$user->name]));
+                    return $this->redirect(['action' => 'login']);
+                } else {
+                    $this->Flash->error(__d('user' , 'Cannot save to database'));
+                    return $this->redirect(['action' => 'register']);
+                }
             }
         }
         $this->set('user', $user);

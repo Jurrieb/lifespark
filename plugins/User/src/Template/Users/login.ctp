@@ -11,4 +11,7 @@ echo $this->Form->input('password', [
     'label' => __d('user', 'Password')
 ]);
 echo $this->Form->button(__d('user', 'Login'));
+echo $this->Html->link(__d('user', 'Register'), [
+    'action' => 'register'
+]);
 echo $this->Form->end();
