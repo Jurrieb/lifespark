@@ -1,0 +1,16 @@
+{
+    "css" : {
+        "target" : "cached.css",
+        "files" : [
+            "base.css",
+            "cake.css"
+        ]
+    },
+    "js" : {
+        "target" : "cached.js",
+        "files" : [
+            "base.js",
+            "application.js"
+        ]
+    }
+}

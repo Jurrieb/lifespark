@@ -12,6 +12,7 @@ echo $this->Form->input('password', [
 ]);
 echo $this->Form->button(__d('user', 'Login'));
 echo $this->Html->link(__d('user', 'Register'), [
-    'action' => 'register'
-]);
+    'action' => 'register']);
+echo $this->Html->link(__d('user', 'Password reset'), [
+    'action' => 'requestPasswordReset']);
 echo $this->Form->end();

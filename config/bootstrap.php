@@ -202,4 +202,4 @@ DispatcherFactory::add('ControllerFactory');
 Type::build('date')->useLocaleParser();
 Type::build('datetime')->useLocaleParser();
 
-Plugin::load('User', ['bootstrap' => false, 'routes' => true]);
+require __DIR__ . '/events.php';
