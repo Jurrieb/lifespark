@@ -7,7 +7,8 @@ Router::defaultRouteClass('Route');
 
 Router::scope('/', function ($routes) {
 
-    $routes->connect('/', ['controller' => 'Pages', 'action' => 'home']);
+    $routes->extensions(['json']);
+    $routes->connect('/', ['controller' => 'Pages', 'action' => 'overview']);
 
     $routes->fallbacks('InflectedRoute');
 });

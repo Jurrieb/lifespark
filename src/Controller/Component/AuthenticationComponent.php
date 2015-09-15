@@ -12,9 +12,9 @@ class AuthenticationComponent extends Component
         $this->Users = TableRegistry::get('Users');
     }
 
-    public function validate(array $test)
+    public function validate(array $allowedActions)
     {
-        if(in_array($this->request->params['action'], $test))
+        if(in_array($this->request->params['action'], $allowedActions))
         {
             return true;
         }
@@ -41,6 +41,11 @@ class AuthenticationComponent extends Component
         return false;
     }
 
+    public function getUser()
+    {
+        return $this->request->session()->read('User');
+    }
+
     public function setUser($id)
     {
         return $this->loginUser($id);
@@ -49,6 +54,7 @@ class AuthenticationComponent extends Component
     public function logoutUser()
     {
         $this->request->session()->delete('User');
+        return true;
     }
 
     private function loginUser($id)
