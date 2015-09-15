@@ -3,7 +3,7 @@
         "target" : "cached.css",
         "files" : [
             "base.css",
-            "cake.css"
+            "application.css"
         ]
     },
     "js" : {
