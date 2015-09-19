@@ -18,5 +18,5 @@ echo $this->Form->input('passwordConfirm', [
     'type' => 'password',
     'label' => __d('user', 'Password confirm')
 ]);
-echo $this->Form->button(__d('user', 'Register'));
+echo $this->Form->button(__d('user', 'Register'), ['class' => 'button']);
 echo $this->Form->end();

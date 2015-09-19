@@ -201,5 +201,3 @@ DispatcherFactory::add('ControllerFactory');
  */
 Type::build('date')->useLocaleParser();
 Type::build('datetime')->useLocaleParser();
-
-require __DIR__ . '/events.php';

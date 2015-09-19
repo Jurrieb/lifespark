@@ -6,8 +6,9 @@ class UsersController extends AppController
 
     public function initialize()
     {
-        $this->allow = ['register', 'login'];
+        $this->allow = ['register', 'login', 'requestPasswordReset', 'passwordReset', 'verifyEmail'];
         parent::initialize();
+        $this->layout = 'unauthorized';
     }
 
     public function register()

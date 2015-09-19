@@ -33,7 +33,6 @@ class AuthenticationComponent extends Component
                    ->where(['email' => $email, 'password' => SHA1($password. $salt), 'activated' => true])
                    ->extract('id')
                    ->first();
-
         if($id) {
             return $this->loginUser($id);
         }

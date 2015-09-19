@@ -1,0 +1,36 @@
+body{
+    background: #f8f8f8;
+    height: 100%;
+}
+html {
+    height: 100%;
+}
+
+h3{
+    color: #888;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 400;
+    margin: 0 0 20px 0;
+}
+
+.backdrop {
+	display: table;
+	height: 100%;
+	width:100%;
+	padding: 0;
+	background: url(../img/background.jpg) no-repeat center center fixed;
+	background-size: cover;
+}
+
+.backdropWrapper {
+	display: table-cell;
+	vertical-align: middle;
+}
+
+.backdropContent {
+	padding: 40px;
+	width: 500px;
+	margin: 0px auto;
+	background: #fff;
+}

@@ -16,6 +16,9 @@ msgstr "Inloggen"
 msgid "Register"
 msgstr "Registreren"
 
+msgid "Register account"
+msgstr "Account registreren"
+
 msgid "Welcome {0}"
 msgstr "Welkom {0}"
 
@@ -24,3 +27,9 @@ msgstr "De combinatie van email en wachtwoord is niet correct"
 
 msgid '{0} youre account has been registerd"
 msgstr "{0} je gegevens zijn opgeslagen"
+
+msgid 'Login with LifeSpark"
+msgstr "Inloggen op LifeSpark"
+
+msgid 'Password reset"
+msgstr "Wachtwoord vergeten"
