@@ -2,5 +2,7 @@
 /config/app.php
 /tmp/*
 /logs/*
-/webroot/css/cached.css
-/webroot/js/cached.js
+/webroot/css/app-cached.css
+/webroot/css/web-cached.css
+/webroot/js/app-cached.js
+/webroot/js/web-cached.js

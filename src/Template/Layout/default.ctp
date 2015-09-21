@@ -7,20 +7,8 @@
         <?= $this->fetch('title') ?>
     </title>
     <?= $this->Html->meta('icon') ?>
-    <?php
-        if($production) {
-            echo $this->Html->css('cached.css');
-            echo $this->Html->script('cached.js');
-        } else {
-            echo $this->Html->css('base.css');
-            echo $this->Html->css('application.css');
-            echo $this->Html->css('icons.css');
-
-            echo $this->Html->script('base.js');
-            echo $this->Html->script('application.js');
-        }
-    ?>
     <?= $this->fetch('meta') ?>
+    <?= $this->Assets->css('app') ?>
     <?= $this->fetch('css') ?>
 </head>
 <body>
@@ -30,14 +18,7 @@
     </div>
     <?= $this->element('sidebar') ?>
     <?= $this->element('header') ?>
+    <?= $this->Assets->script('app') ?>
     <?= $this->fetch('script') ?>
-    <?php
-        if($production) {
-            echo $this->Html->script('cached.js');
-        } else {
-            echo $this->Html->script('base.js');
-            echo $this->Html->script('application.js');
-        }
-    ?>
 </body>
 </html>

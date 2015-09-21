@@ -7,6 +7,7 @@ use Cake\Network\Exception\UnauthorizedException;
 
 class AppController extends Controller
 {
+    public $helpers = ['Assets'];
     public $authenticate = true;
     public $allow = [];
 
@@ -22,7 +23,6 @@ class AppController extends Controller
             $this->Flash->error(__('You are not authorized to view this page'));
             return $this->redirect(['controller' => 'users', 'action' => 'login']);
         }
-
-        $this->set('production', ($_SERVER['SERVER_NAME'] == 'lifespark.dev' ? false : true));
+        
     }
 }

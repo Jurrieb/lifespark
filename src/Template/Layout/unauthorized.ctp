@@ -7,10 +7,7 @@
         <?= $this->fetch('title') ?>
     </title>
     <?= $this->Html->meta('icon') ?>
-    <?php
-        echo $this->Html->css('base.css');
-        echo $this->Html->css('unauthorized.css');
-    ?>
+    <?= $this->Assets->css('website') ?>
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
 </head>
@@ -24,12 +21,6 @@
         </div>
     </section>
     <?= $this->fetch('script') ?>
-    <?php
-        if($production) {
-            echo $this->Html->script('cached.js');
-        } else {
-            echo $this->Html->script('base.js');
-        }
-    ?>
+    <?= $this->Assets->script('website') ?>
 </body>
 </html>

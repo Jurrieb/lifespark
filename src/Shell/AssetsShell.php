@@ -12,37 +12,36 @@ class AssetsShell extends Shell
         $this->out('- compress');
     }
 
+    private function build($target, $type, $files)
+    {
+        $myfile = fopen(ROOT . DS . 'webroot' . DS . $type . DS . $target, "w");
+        foreach($files as $file) {
+            $path = ROOT . DS . 'webroot' . DS . $type . DS . $file;
+            $this->out($path);
+            if(file_exists($path)) {
+                $data = file_get_contents($path);
+                $data = $this->compressCss($data);
+                fwrite($myfile, $data);
+            } else {
+                $this->out('Could not find file: ' . $file);
+            }
+        }
+        fclose($myfile);
+    }
+
     public function compress()
     {
         $this->out('loading config file');
-        $files = $this->getConfig();
-        if($this->validateConfig($files)){
-            $myfile = fopen(ROOT . DS . 'webroot' . DS . 'css' . DS . $files['css']['target'], "w");
-            foreach($files['css']['files'] as $file) {
-                $path = ROOT . DS . 'webroot' . DS . 'css' . DS . $file;
-                $this->out($path);
-                if(file_exists($path)) {
-                    $data = file_get_contents($path);
-                    $data = $this->compressCss($data);
-                    fwrite($myfile, $data);
-                } else {
-                    $this->out('Could not find file: ' . $file);
+        $config = $this->getConfig();
+        if($this->validateConfig($config)){
+
+            foreach($config as $type => $list) {
+                foreach($list as $env){
+                    $taget = $env['cache'];
+                    $this->build($taget, $type, $env['files']);
                 }
             }
-            fclose($myfile);
-            $myfile = fopen(ROOT . DS . 'webroot' . DS . 'js' . DS . $files['js']['target'], "w");
-            foreach($files['js']['files'] as $file) {
-                $path = ROOT . DS . 'webroot' . DS . 'js' . DS . $file;
-                $this->out($path);
-                if(file_exists($path)) {
-                    $data = file_get_contents($path);
-                    $data = $this->compressJs($data);
-                    fwrite($myfile, $data);
-                } else {
-                    $this->out('Could not find file: ' . $file);
-                }
-            }
-            fclose($myfile);
+
             $this->out('compressed files');
         }
     }
@@ -66,20 +65,20 @@ class AssetsShell extends Shell
         $errors = false;
         foreach($config as $key => $val){
 
-            if($key != 'css' && $key != 'js') {
-                $errors = true;
-                $this->out('Wrong asset type defined: ' . $key);
-            }
-
-            if(!isset($val['target'])) {
-                $errors = true;
-                $this->out('No target file defined');
-            }
-
-            if(!isset($val['files'])) {
-                $errors = true;
-                $this->out('No files to compress defined');
-            }
+//            if($key != 'css' && $key != 'js') {
+//                $errors = true;
+//                $this->out('Wrong asset type defined: ' . $key);
+//            }
+//
+//            if(!isset($val['target'])) {
+//                $errors = true;
+//                $this->out('No target file defined');
+//            }
+//
+//            if(!isset($val['files'])) {
+//                $errors = true;
+//                $this->out('No files to compress defined');
+//            }
         }
         if(!$errors){
             return true;

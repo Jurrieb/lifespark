@@ -40,8 +40,11 @@ class AuthenticationComponent extends Component
         return false;
     }
 
-    public function getUser()
+    public function getUser($field = null)
     {
+        if($field != null) {
+            return $this->request->session()->read('User.'. $field);
+        }
         return $this->request->session()->read('User');
     }
 

@@ -1,16 +1,39 @@
 {
     "css" : {
-        "target" : "cached.css",
-        "files" : [
-            "base.css",
-            "application.css"
-        ]
+        "app" : {
+            "cache" : "app-cached.css",
+            "files" : [
+                "base.css",
+                "icons.css",
+                "application.css",
+                "posts.css"
+            ]
+        },
+        "website" : {
+            "cache" : "web-cached.css",
+            "files" : [
+                "base.css",
+                "unauthorized.css"
+            ]
+        }
     },
     "js" : {
-        "target" : "cached.js",
-        "files" : [
-            "base.js",
-            "application.js"
-        ]
+        "app" : {
+            "cache" : "app-cached.js",
+            "files" : [
+                "jquery.js",
+                "application.js",
+                "validate.js",
+                "posts.js"
+            ]
+        },
+        "website" : {
+            "cache" : "web-cached.js",
+            "files" : [
+                "jquery.js",
+                "application.js",
+                "validate.js"
+            ]
+        }
     }
 }

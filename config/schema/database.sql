@@ -67,3 +67,5 @@ ALTER TABLE `users_settings`
 
 ALTER TABLE `users_settings`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+CREATE TABLE `lifespark`.`friends` ( `id` INT(11) NOT NULL AUTO_INCREMENT , `user_id` INT(11) NOT NULL , `friend_id` INT(11) NOT NULL , `accepted` TINYINT(1) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
