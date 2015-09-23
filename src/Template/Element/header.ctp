@@ -1,3 +1,4 @@
+<?php $currentUser = $this->request->session()->read('User'); ?>
 <header class="topbar">
 
 	<div class="user">
@@ -5,9 +6,9 @@
             <img>
         </div>
         <div class="information">
-            <div class="name">John Doe</div>
+            <div class="name"><?php echo $currentUser->name;?></div>
             <div class="karma">
-                <span class="label">20 karma</span>
+                <span class="label"><?php echo $currentUser->karma;?> karma</span>
             </div>
         </div>
 	</div>

@@ -2,7 +2,21 @@ $(function() {
 
 });
 
-function timeAge()
+function timeAgo()
 {
 
+}
+
+function createFlashMessage()
+{
+
+}
+
+function createLoader()
+{
+
+}
+
+function ajaxErrorHandler()
+{
 }

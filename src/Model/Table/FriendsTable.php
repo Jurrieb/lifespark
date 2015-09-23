@@ -21,7 +21,7 @@ class FriendsTable extends Table
     public function findIds($userId)
     {
         $friends1 = $this->find()
-            ->orWhere(['friend_id' => $userId, 'accepted' => true])
+            ->where(['friend_id' => $userId, 'accepted' => true])
             ->extract('user_id')
             ->toArray();
         $friends2 = $this->find()
@@ -29,6 +29,31 @@ class FriendsTable extends Table
             ->extract('friend_id')
             ->toArray();
         return array_merge($friends1, $friends2);
+    }
 
+    public function checkConnection($userId, $profileId)
+    {
+        if($userId == $profileId) {
+            return 'self';
+        }
+        $connection = $this->find()
+            ->where(['friend_id' => $userId, 'user_id' => $profileId])
+            ->orWhere(['user_id' => $userId, 'friend_id' => $profileId])
+            ->first();
+
+        if($connection) {
+            
+            if($connection->accepted) {
+                return 'accepted';
+            }
+
+            if($connection->user_id == $userId) {
+                return 'requested';
+            } else {
+                return 'friend-request';
+            }
+
+        }
+        return false;
     }
 }

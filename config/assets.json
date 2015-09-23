@@ -6,14 +6,15 @@
                 "base.css",
                 "icons.css",
                 "application.css",
-                "posts.css"
+                "posts.css",
+                "plugins.css"
             ]
         },
         "website" : {
             "cache" : "web-cached.css",
             "files" : [
                 "base.css",
-                "unauthorized.css"
+                "website.css"
             ]
         }
     },
@@ -24,14 +25,15 @@
                 "jquery.js",
                 "application.js",
                 "validate.js",
-                "posts.js"
+                "posts.js",
+                "plugins.js"
             ]
         },
         "website" : {
             "cache" : "web-cached.js",
             "files" : [
                 "jquery.js",
-                "application.js",
+                "website.js",
                 "validate.js"
             ]
         }

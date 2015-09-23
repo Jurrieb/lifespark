@@ -15,14 +15,15 @@ class AppController extends Controller
     {
         $this->loadComponent('Flash');
         $this->loadComponent('Authentication');
+        $this->loadComponent('RequestHandler');
 
-        if(!$this->Authentication->validate($this->allow)) {
+        if(!isset($this->allow) || !$this->Authentication->validate($this->allow)) {
             if($this->request->is('json')) {
                throw new UnauthorizedException('You are not authorized');
             }
             $this->Flash->error(__('You are not authorized to view this page'));
             return $this->redirect(['controller' => 'users', 'action' => 'login']);
         }
-        
+
     }
 }

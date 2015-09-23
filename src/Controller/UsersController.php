@@ -1,6 +1,8 @@
 <?php
 namespace App\Controller;
 
+use Cake\Network\Email\Email;
+
 class UsersController extends AppController
 {
 
@@ -8,7 +10,7 @@ class UsersController extends AppController
     {
         $this->allow = ['register', 'login', 'requestPasswordReset', 'passwordReset', 'verifyEmail'];
         parent::initialize();
-        $this->layout = 'unauthorized';
+        $this->layout = 'website';
     }
 
     public function register()
@@ -17,7 +19,16 @@ class UsersController extends AppController
        if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->data, ['validate' => 'register']);
             if($this->Users->save($user)){
-                // @ todo: send password reset token
+                $email = new Email('default');
+                $email->viewVars([
+                        'user' => $user->name,
+                        'token' => $user->token
+                    ])
+                    ->from(['noreply@lifespark.nl' => 'LifeSpark'])
+                    ->to($user->email)
+                    ->emailFormat('html')
+                    ->template('welcome')
+                    ->subject('Welkom op LifeSpark.nl');
                 $this->Flash->success(__('User has been created. Please check youre email to activate youre account.'));
                 return $this->redirect(['action' => 'login']);
             } else {
@@ -64,7 +75,16 @@ class UsersController extends AppController
             $user = $this->Users->patchEntity($user, $this->request->data, ['validate' => 'requestPasswordReset']);
             if(!$user->errors()) {
                 $token = $this->Users->savePasswordToken($this->request->data['email']);
-                // @todo : send email with token
+                $email = new Email('default');
+                $email->viewVars([
+                        'token' => $token,
+                        'name' => $user->name
+                    ])
+                    ->from(['noreply@lifespark.nl' => 'LifeSpark'])
+                    ->to($user->email)
+                    ->emailFormat('html')
+                    ->template('password_reset')
+                    ->subject('Wachtwoord veranderen op LifeSpark.nl');
                 $this->Flash->success(__('An email has been send to {0}', [$this->request->data['email']]));
                 return $this->redirect(['action' => 'login']);
             }
@@ -110,6 +130,15 @@ class UsersController extends AppController
             return $this->redirect(['action' => 'login']);
         }
         throw new NotFoundException(_('This page does not exist'));
+    }
+
+    public function profile($slug = null)
+    {
+        $this->layout = 'default';
+        $user = $this->Users->findBySlug($slug);
+        $connection = $this->Users->Friends->checkConnection( $this->Authentication->getUser('id') , $user->id);
+        $this->set('connection', $connection);
+        $this->set('user', $user);
     }
 
 }

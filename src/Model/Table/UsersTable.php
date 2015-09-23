@@ -18,23 +18,30 @@ class UsersTable extends Table
                 ]
             ]
         ]);
+
         $this->belongsTo('UsersVerifyTokens', [
             'className' => 'UsersVerifyTokens',
             'dependent' => true
         ]);
+
         $this->belongsTo('UsersPasswordTokens', [
             'className' => 'UsersPasswordTokens',
             'dependent' => true
         ]);
+
+        $this->hasMany('Friends', [
+            'className' => 'Friends',
+            'dependent' => true
+        ]);
+
+        $this->addBehavior('Sluggable');
     }
 
-    public function beforeSave (\Cake\Event\Event $event, \Cake\ORM\Entity $entity, ArrayObject $options)
+    public function findBySlug($slug)
     {
-        if(isset($entity->password) && !empty($entity->password)) {
-            $entity->password_salt = $this->randomString(24);
-            $entity->password = SHA1($entity->password . $entity->password_salt);
-            unset($entity->passwordConfirm);
-        }
+        return $this->find()
+                    ->where(['slug' => $slug])
+                    ->first();
     }
 
     public function findSalt($email)
@@ -43,13 +50,6 @@ class UsersTable extends Table
                     ->where(['email' => $email])
                     ->extract('password_salt')
                     ->first();
-    }
-
-    public function afterSave(\Cake\Event\Event $event, \Cake\ORM\Entity $entity, ArrayObject $options)
-    {
-        if ($entity->isNew()) {
-            $this->saveVerifyToken($entity->id);
-        }
     }
 
     public function saveVerifyToken($userId)
@@ -135,6 +135,21 @@ class UsersTable extends Table
             ->notEmpty('name', _('Name is required'))
             ->notEmpty('email', _('Email is required'))
             ->notEmpty('password', _('Password is required'))
+            ->add('name', [
+                'minLength' => [
+                    'rule' => ['minLength', 5],
+                    'last' => true,
+                    'message' => 'Min length of 5.'
+                ],
+                'maxLength' => [
+                    'rule' => ['maxLength', 40],
+                    'message' => 'max length of 40'
+                ],
+                'alphaNumeric' => [
+                    'rule' => 'alphaNumeric',
+                    'message' => 'Can only contain letters and numbers'
+                ]
+            ])
             ->notEmpty('passwordConfirm', _('Password confirm is required'))
             ->add('email', 'validFormat', [
                 'rule' => 'email',
@@ -195,5 +210,21 @@ class UsersTable extends Table
                 },
                 'message' => 'De ingevulde wachtwoorden zijn niet gelijk.'
             ]);
+    }
+
+    public function beforeSave (\Cake\Event\Event $event, \Cake\ORM\Entity $entity, ArrayObject $options)
+    {
+        if(isset($entity->password) && !empty($entity->password)) {
+            $entity->password_salt = $this->randomString(24);
+            $entity->password = SHA1($entity->password . $entity->password_salt);
+            unset($entity->passwordConfirm);
+        }
+    }
+
+    public function afterSave(\Cake\Event\Event $event, \Cake\ORM\Entity $entity, ArrayObject $options)
+    {
+        if ($entity->isNew()) {
+            $this->saveVerifyToken($entity->id);
+        }
     }
 }
