@@ -17,11 +17,15 @@ class PagesController extends AppController
     public function overview()
     {
         $this->Friends = $this->loadModel('Friends');
+        $this->Posts = $this->loadModel('Posts');
         $userId = $this->Authentication->getUser('id');
+
         $friendIds = $this->Friends->findIds($userId);
-        $friends = $this->Friends->Users->find()
-                ->where(['Users.id IN' => $friendIds])
-                ->all();
+        $friends = $this->Friends->findFriends($friendIds);
+        $postUserIds = $friendsIds[] = $userId;
+        $posts = $this->Posts->findByUserIds($postUserIds);
+
+        $this->set('posts', $posts);
         $this->set('friends', $friends);
     }
 }

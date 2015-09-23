@@ -134,9 +134,16 @@ class UsersController extends AppController
 
     public function profile($slug = null)
     {
-        $this->layout = 'default';
         $user = $this->Users->findBySlug($slug);
+        if(!$user) {
+            throw new NotFoundException('Could not find that user');
+        }
+        $this->Posts = $this->loadModel('Posts');
+        $this->layout = 'default';
+
         $connection = $this->Users->Friends->checkConnection( $this->Authentication->getUser('id') , $user->id);
+        $posts = $this->Posts->findByUserIds($user->id);
+        $this->set('posts', $posts);
         $this->set('connection', $connection);
         $this->set('user', $user);
     }

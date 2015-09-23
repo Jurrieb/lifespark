@@ -24,4 +24,9 @@
     ?>
 </div>
 <div class="block">
+    <div class="posts">
+    <?php foreach($posts as $post) {
+        echo $this->element('post', ['post' => $post]);
+    }?>
+    </div>
 </div>

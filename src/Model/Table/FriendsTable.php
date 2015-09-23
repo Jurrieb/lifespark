@@ -7,6 +7,15 @@ class FriendsTable extends Table
 {
     public function initialize(array $config)
     {
+        $this->addBehavior('Timestamp', [
+            'events' => [
+                'Model.beforeSave' => [
+                    'created_at' => 'new',
+                    'modified_at' => 'always'
+                ]
+            ]
+        ]);
+        
         $this->belongsTo('Users', [
             'className' => 'Users',
             'foreignKey' => 'user_id',
@@ -16,6 +25,13 @@ class FriendsTable extends Table
             'className' => 'Users',
             'foreignKey' => 'friend_id',
         ]);
+    }
+
+    public function findFriends($friendIds)
+    {
+        return $this->Users->find()
+            ->where(['Users.id IN' => $friendIds])
+            ->all();
     }
 
     public function findIds($userId)
@@ -42,7 +58,7 @@ class FriendsTable extends Table
             ->first();
 
         if($connection) {
-            
+
             if($connection->accepted) {
                 return 'accepted';
             }
