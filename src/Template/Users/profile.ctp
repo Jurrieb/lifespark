@@ -3,25 +3,32 @@
     <div class="karma">
         <span class="label"><?php echo $user->karma;?> karma</span>
     </div>
+    <div class="connection">
     <?php
+    echo $this->Form->create();
+    echo $this->Form->hidden('slug', ['value' => $user->slug]);
     switch ($connection) {
         case 'accepted':
-            echo "You are friends";
+            echo $this->Form->hidden('action', ['value' => 'remove']);
+            echo $this->Form->button('Remove friend', ['class' => 'button orange']);
             break;
         case 'requested':
-            echo "You have requested to be friends";
+            echo $this->Form->button('Request has been send', ['class' => 'button green']);
             break;
         case 'friend-request':
-            echo "This person has requested to be friends";
+            echo $this->Form->hidden('action', ['value' => 'accept']);
+            echo $this->Form->button('Accept friend request', ['class' => 'button green']);
             break;
         case 'self':
-            echo "This is youre profile";
             break;
         default:
-            echo "Send a friend request";
+            echo $this->Form->hidden('action', ['value' => 'send']);
+            echo $this->Form->button('Send friend request', ['class' => 'button green']);
             break;
     }
-    ?>
+    echo $this->Form->end();
+        ?>
+    </div>
 </div>
 <div class="block">
     <div class="posts">

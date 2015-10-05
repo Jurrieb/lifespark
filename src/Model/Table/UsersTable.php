@@ -19,6 +19,11 @@ class UsersTable extends Table
             ]
         ]);
 
+        $this->hasMany('UsersPlugins', [
+            'className' => 'UsersPlugins',
+            'dependent' => true
+        ]);
+
         $this->belongsTo('UsersVerifyTokens', [
             'className' => 'UsersVerifyTokens',
             'dependent' => true
@@ -37,10 +42,28 @@ class UsersTable extends Table
         $this->addBehavior('Sluggable');
     }
 
-    public function findBySlug($slug)
+    public function changeKarma($ammount, $operator, $userId)
+    {
+        $karma = $this->find()
+                ->where(['id' => $userId])
+                ->extract('karma')
+                ->first();
+        if(! $karma) { return false; }
+        if($operator == 'add') {
+            $karma = $karma + $ammount;
+        }
+        if($operator == 'subtract') {
+            if(($karma - $ammount) > 0) {
+                $karma = $karma - $ammount;
+            }
+        }
+        return false;
+    }
+
+    public function findProfile($slug)
     {
         return $this->find()
-                    ->where(['slug' => $slug])
+                    ->where(['slug' => $slug, 'activated' => true])
                     ->first();
     }
 

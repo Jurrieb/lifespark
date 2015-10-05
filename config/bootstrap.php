@@ -201,8 +201,7 @@ DispatcherFactory::add('ControllerFactory');
  */
 Type::build('date')->useLocaleParser();
 Type::build('datetime')->useLocaleParser();
+
 Plugin::load('Smoking', ['bootstrap' => false, 'routes' => true]);
-
 Plugin::load('Running', ['bootstrap' => false, 'routes' => true]);
-
 Plugin::load('Weightloss', ['bootstrap' => false, 'routes' => true]);

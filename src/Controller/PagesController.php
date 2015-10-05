@@ -11,7 +11,7 @@ class PagesController extends AppController
 
     public function index()
     {
-        $this->layout = 'website';
+        $this->viewBuilder()->layout('website');
     }
 
     public function overview()
@@ -21,7 +21,9 @@ class PagesController extends AppController
         $userId = $this->Authentication->getUser('id');
 
         $friendIds = $this->Friends->findIds($userId);
+        $rankingFriends = $friendIds[] = $userId;
         $friends = $this->Friends->findFriends($friendIds);
+
         $postUserIds = $friendsIds[] = $userId;
         $posts = $this->Posts->findByUserIds($postUserIds);
 

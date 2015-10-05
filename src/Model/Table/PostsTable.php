@@ -20,18 +20,28 @@ class PostsTable extends Table
             'className' => 'Users',
             'foreignKey' => 'user_id',
         ]);
+
+        $this->hasMany('Comments', [
+            'className' => 'Comments',
+            'foreignKey' => 'post_id',
+        ]);
     }
 
     public function findByUserIds($id) {
         if(is_array($id)){
             return $this->find()
                    ->where(['user_id IN' => $id])
+                    ->contain([
+			   			'Comments.Users', 'Users',
+					])
                    ->all();
         }
         return $this->find()
                ->where(['user_id' => $id])
+                ->contain([
+			   			'Comments.Users', 'Users',
+					])
                ->all();
     }
-
 
 }

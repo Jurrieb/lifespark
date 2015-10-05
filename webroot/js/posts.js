@@ -352,6 +352,34 @@
 //	}
 //
 //});
+function createPost(data)
+{
+    comments = '';
+
+    if(data.comments.length > 0) {
+    	comments += "<div class='comments'>";
+        $.each( data.comments, function( value ) {
+            comments += createComment(value);
+        });
+        comments += "</div>";
+    }
+
+    post = "<div class='postWrapper'>\
+                <div class='post'>\
+                    <div class='postHead'><a href='/" + data.user.slug + ">" + data.user.name + "</a></div>\
+                    <div class='postContent'>" + data.content + "</div>\
+                </div>\
+                <div class='comments'>" + comments + "</div>\
+            </div>";
+
+    return post;
+}
+
+function createComment(data)
+{
+    comment = "<div class='comment'><a href='/" + comment.user.slug + ">" + comment.user.name + "</a>: " + comment.content + "</div>";
+    return comment;
+}
 
 $(function()
 {
@@ -370,36 +398,57 @@ $(function()
 
             }).fail(function( ) {
 
-            }).always(function( ) { 
+            }).always(function( ) {
                 // remove loader
             });
         }
     }
-});
 
-function createPost(data)
-{
-    comments = '';
+	$('.createPost form').on('submit', function(e){
+        $.ajax({
+            type: "POST",
+            url: "/posts/add.json",
+            data: $(this).serialize()
+        }).done(function( data ) {
+            $('.posts').prepend(createPost(data['post']));
+        }).fail(function( ) {
 
-    if(data.comments.length > 0) {
-    	comments += "<div class='comments'>";
-        $.each( data.comments, function( value ) {
-            comments += createComment(value);
+        }).always(function( ) {
+
         });
-        comments += "</div>";
-    }
+        e.preventDefault();
+    });
 
-    post = "<div class='postWrapper'>\
-                <div class='post'\
-                </div>\
-                " + comments + "\
-            </div>";
+    $('.posts').on('submit', '.createComment form', function(e){
+        var comments = $(this).parent().parent().find('.comments');
+        $.ajax({
+            type: "POST",
+            url: "/comments/add.json",
+            data: $(this).serialize()
+        }).done(function( data ) {
+            comments.append(createPost(data['comment']));
+        }).fail(function( ) {
 
-    return post;
-}
+        }).always(function( ) {
 
-function createComment(data)
-{
-    comment = "<div class='comment'></div>";
-    return comment;
-}
+        });
+        e.preventDefault();
+    });
+
+    $('.posts').on('submit', '.karma form', function(e){
+
+        $.ajax({
+            type: "POST",
+            url: "/posts/karma.json",
+            data: $(this).serialize()
+        }).done(function( data ) {
+
+        }).fail(function( ) {
+
+        }).always(function( ) {
+
+        });
+        e.preventDefault();
+    });
+
+});

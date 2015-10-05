@@ -19,7 +19,7 @@ class PostsController extends AppController
     public function index()
     {
         $this->set('posts', $this->paginate($this->Posts));
-        $this->set('_serialize', ['posts']);
+        $this->set('_serialize', true);
     }
 
     /**
@@ -35,7 +35,7 @@ class PostsController extends AppController
             'contain' => []
         ]);
         $this->set('post', $post);
-        $this->set('_serialize', ['post']);
+        $this->set('_serialize', true);
     }
 
     /**
@@ -47,16 +47,21 @@ class PostsController extends AppController
     {
         $post = $this->Posts->newEntity();
         if ($this->request->is('post')) {
+            $this->request->data['user_id'] = $this->Authentication->getUser('id');
             $post = $this->Posts->patchEntity($post, $this->request->data);
             if ($this->Posts->save($post)) {
-                $this->Flash->success(__('The post has been saved.'));
-                return $this->redirect(['action' => 'index']);
-            } else {
-                $this->Flash->error(__('The post could not be saved. Please, try again.'));
+                $post = $this->Posts
+					->find()
+					->where(['Posts.id' => $post->id] )
+					->contain([
+			   			'Comments.Users', 'Users',
+					])
+					->first();
+
+                $this->set(compact('post'));
+                $this->set('_serialize', true);
             }
         }
-        $this->set(compact('post'));
-        $this->set('_serialize', ['post']);
     }
 
     /**
@@ -81,7 +86,7 @@ class PostsController extends AppController
             }
         }
         $this->set(compact('post'));
-        $this->set('_serialize', ['post']);
+        $this->set('_serialize', true);
     }
 
     /**
@@ -101,5 +106,13 @@ class PostsController extends AppController
             $this->Flash->error(__('The post could not be deleted. Please, try again.'));
         }
         return $this->redirect(['action' => 'index']);
+    }
+
+    public function karma()
+    {
+        if($this->request->is('post')) {
+            $post = $this->Posts->get($this->request->data['id']);
+            $this->Posts->Users->changeKarma(1, 'subtract', $this->Authentication->getUser('id'));
+        }
     }
 }

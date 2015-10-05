@@ -6,7 +6,13 @@
             <img>
         </div>
         <div class="information">
-            <div class="name"><?php echo $currentUser->name;?></div>
+            <div class="name">
+                <?php echo $this->Html->link($currentUser->name,
+                        ['controller' => 'Users', 'action' => 'profile', $currentUser->slug],
+                        ['escape' => false]
+                    );
+                ?>
+            </div>
             <div class="karma">
                 <span class="label"><?php echo $currentUser->karma;?> karma</span>
             </div>

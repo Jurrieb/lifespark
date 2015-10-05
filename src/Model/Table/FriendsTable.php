@@ -15,7 +15,7 @@ class FriendsTable extends Table
                 ]
             ]
         ]);
-        
+
         $this->belongsTo('Users', [
             'className' => 'Users',
             'foreignKey' => 'user_id',
@@ -47,14 +47,14 @@ class FriendsTable extends Table
         return array_merge($friends1, $friends2);
     }
 
-    public function checkConnection($userId, $profileId)
+    public function checkConnection($userId, $friendId)
     {
         if($userId == $profileId) {
             return 'self';
         }
         $connection = $this->find()
-            ->where(['friend_id' => $userId, 'user_id' => $profileId])
-            ->orWhere(['user_id' => $userId, 'friend_id' => $profileId])
+            ->where(['friend_id' => $userId, 'user_id' => $friendId])
+            ->orWhere(['user_id' => $userId, 'friend_id' => $friendId])
             ->first();
 
         if($connection) {
@@ -70,6 +70,37 @@ class FriendsTable extends Table
             }
 
         }
+        return false;
+    }
+
+    public function updateConnection($userId, $slug, $action)
+    {
+        $friend = $this->Users->find()
+            ->where(['slug' => $slug])
+            ->extract('friend_id')
+            ->first();
+
+        $connection = $this->checkConnection($userId, $friend->id);
+
+        switch($action) {
+            case 'send':
+                if($connection) { return false; }
+                $newConnection = $this->Posts->newEntity(['friend_id' => $friend->id, 'user_id' => $userId]);
+                if($this->save($newConnection)){ return true; }
+            break;
+            case 'accept':
+                if ($connection->accepted) { return false; }
+                $connection = $this->patchEntity($connection, ['accepted' => true]);
+                if($this->save($connection)){ return true; }
+            break;
+            case 'delete':
+                if($connection->accepted){ return false; }
+                if($this->delete($connection)){ return true; }
+            break;
+            case 'break':
+            break;
+        }
+        
         return false;
     }
 }

@@ -11,9 +11,7 @@ class FriendsController extends AppController
 
     public function index()
     {
-        $userId = $this->Authentication->getUser('id');
-
-        $friendIds = $this->Friends->findIds($userId);
+        $friendIds = $this->Friends->findIds($this->Authentication->getUser('id'));
         $friends = $this->Friends->findFriends($friendIds);
 
         $this->set('friends', $friends);
@@ -27,7 +25,11 @@ class FriendsController extends AppController
 
     public function relation()
     {
-
+        if ($this->request->is('post')) {
+            $connection = $this->Friends->updateConnection($this->Authentication->getUser('id'), $this->request->data['slug'], $this->request->data['action']);
+            $this->set('connection', $connection);
+            $this->set('_serialize', ['connection']);
+        }
     }
 
 }

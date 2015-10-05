@@ -1,0 +1,45 @@
+.createPost{
+    width: 100%;
+    margin: 0 0 20px 0;
+    padding: 10px;
+    background: #efefef;
+    border: 1px solid #d5d5d5;
+    border-bottom-width: 3px;
+}
+
+.createPost .button {
+    display: none;
+}
+
+.createPost textarea{
+    width: 100%;
+    height: 44px;
+    border: 0;
+    border-color: #d5d5d5;
+    padding: 11px;
+}
+
+.posts{
+    width: 100%;
+}
+
+.posts .postWrapper{
+    margin: 0 0 20px 0;
+    background: #fff;
+    border: 1px solid #d5d5d5;
+    border-bottom-width: 2px;
+}
+
+.posts .postWrapper .post {
+    padding: 20px;
+    border-bottom: 1px solid #d5d5d5;
+}
+
+.posts .postWrapper .comments {
+    width: 100%;
+}
+
+.comments .comment {
+    padding: 10px 20px;
+    border-bottom: 1px solid #d5d5d5;
+}
