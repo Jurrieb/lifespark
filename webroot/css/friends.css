@@ -1,0 +1,39 @@
+.friends{
+    float: left;
+    width: 100%;
+    padding: 15px;
+}
+
+.friends .friend{
+    float: left;
+    width: 20%;
+    padding: 15px;
+    text-align: center;
+}
+
+.friends .friend .avatar{
+    position: relative;
+    margin: 0 auto 10px;
+}
+
+.friends .friend .avatar .karma{
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    text-align: center;
+    width: 100%;
+    line-height: 1;
+}
+
+.friends .friend .avatar .karma .label{
+    font-size: 14px;
+}
+
+.friends .friend .name{
+    font-size: 16px;
+}
+
+.friends .friend .name a{
+    color: #636363;
+    text-decoration: none;
+}
