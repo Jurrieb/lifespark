@@ -43,7 +43,7 @@ class PostsController extends AppController
      *
      * @return void Redirects on successful add, renders view otherwise.
      */
-    public function add()
+    public function create()
     {
         $post = $this->Posts->newEntity();
         if ($this->request->is('post')) {

@@ -1,17 +1,25 @@
-.createPost{
+.create-post {
     width: 100%;
-    margin: 0 0 20px 0;
     padding: 10px;
     background: #efefef;
     border: 1px solid #d5d5d5;
     border-bottom-width: 3px;
+    position: relative;
+    margin: 0 0 20px 0;
 }
 
-.createPost .button {
+.create-post .focus {
+    padding-right: 120px;
+}
+
+.create-post .button {
     display: none;
+    position: absolute;
+    right: 10px;
+    top: 10px;
 }
 
-.createPost textarea{
+.create-post textarea {
     width: 100%;
     height: 44px;
     border: 0;
@@ -23,23 +31,105 @@
     width: 100%;
 }
 
-.posts .postWrapper{
+.posts .post-wrapper {
+    float: left;
+    width: 100%;
     margin: 0 0 20px 0;
-    background: #fff;
-    border: 1px solid #d5d5d5;
-    border-bottom-width: 2px;
 }
 
-.posts .postWrapper .post {
+.posts .post {
+    float: left;
+    width: 100%;
+    border: 1px solid #eeeeee;
+}
+
+.post .post-head {
+    position: relative;
+    width: 100%;
+    height: 70px;
+    padding: 10px 20px;
+    background: #fafafa;
+    border-bottom: 1px solid #eeeeee;
+}
+
+.post .post-head .avatar {
+    float: left;
+    margin-right: 20px;
+}
+
+.post .post-head .dropup {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.post .post-head .post-information {
+    float: left;
+}
+
+.post .post-head .post-information .name {
+    height: 25px;
+    line-height: 25px;
+    color: #636363;
+    text-decoration: none;
+}
+
+.post .post-head .post-information .date{
+    height: 25px;
+    line-height: 25px;
+    color: #aeaeae;
+    font-size: 13px;
+}
+
+.post .post-content {
     padding: 20px;
-    border-bottom: 1px solid #d5d5d5;
+    background: #fff;
+    border-bottom: 1px solid #eee;
 }
 
-.posts .postWrapper .comments {
+.posts .comments {
     width: 100%;
 }
 
 .comments .comment {
+    float: left;
+    width: 100%;
     padding: 10px 20px;
-    border-bottom: 1px solid #d5d5d5;
+    border-bottom: 1px solid #eee;
+    background: #fff;
+    position: relative;
+}
+
+.comment .avatar {
+    float: left;
+    margin-right: 20px;
+}
+
+.comment .comment-information {
+    float: left;
+    width: 160px;
+}
+
+.comment .comment-information .name {
+    color: #636363;
+    text-decoration: none;
+}
+
+.comment .comment-information .date {
+    color: #aeaeae;
+    font-size: 13px;
+}
+
+.comment .dropup {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.comment .comment-information .date{
+
+}
+
+.comment .comment-content {
+
 }

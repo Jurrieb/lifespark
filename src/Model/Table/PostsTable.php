@@ -37,11 +37,12 @@ class PostsTable extends Table
                    ->all();
         }
         return $this->find()
-               ->where(['user_id' => $id])
-                ->contain([
-			   			'Comments.Users', 'Users',
-					])
-               ->all();
+            ->where(['user_id' => $id])
+            ->contain([
+                     'Comments.Users', 'Users',
+                 ])
+            ->order(['Posts.created_at' => 'DESC'])
+            ->all();
     }
 
 }

@@ -3,16 +3,19 @@
         "app" : {
             "cache" : "app-cached.css",
             "files" : [
+                "reset.css",
                 "base.css",
                 "icons.css",
                 "application.css",
                 "posts.css",
+                "friends.css",
                 "plugins.css"
             ]
         },
         "website" : {
             "cache" : "web-cached.css",
             "files" : [
+                "reset.css",
                 "base.css",
                 "website.css"
             ]

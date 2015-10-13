@@ -1,9 +1,9 @@
 <?php $currentUser = $this->request->session()->read('User'); ?>
 <header class="topbar">
 
-	<div class="user">
+	<div class="active-user">
         <div class="avatar">
-            <img>
+            J
         </div>
         <div class="information">
             <div class="name">
@@ -14,15 +14,15 @@
                 ?>
             </div>
             <div class="karma">
-                <span class="label"><?php echo $currentUser->karma;?> karma</span>
+                <span class="label green"><?php echo $currentUser->karma;?> karma</span>
             </div>
         </div>
 	</div>
 
 	<nav class="menu">
 		<ul>
-            <li><a href="#"><span class="icon-mail"></span></a></li>
-            <li><a href="#"><span class="icon-notifications"></span></a></li>
+            <li><a href="#"><span class="icon-question_answer"></span></a></li>
+            <li><a href="#"><span class="icon-public"></span></a></li>
             <?php
             echo '<li>'.$this->Html->link(
 				    '<span class="icon-settings"></span>',

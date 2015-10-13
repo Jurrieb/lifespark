@@ -8,7 +8,7 @@ use Cake\Network\Exception\NotFoundException;
 
 class AppController extends Controller
 {
-    public $helpers = ['Assets'];
+    public $helpers = ['Assets', 'Time'];
     public $authenticate = true;
     public $allow = [];
 

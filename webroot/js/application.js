@@ -1,4 +1,8 @@
 $(function () {
+    $('document').on('click', '.dropup', function() {
+        console.log('yolo');
+    });
+
 
 });
 

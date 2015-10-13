@@ -8,8 +8,8 @@
     </title>
     <?= $this->Html->meta('icon') ?>
     <?= $this->fetch('meta') ?>
-    <?= $this->Assets->css('app') ?>
     <?= $this->fetch('css') ?>
+    <?= $this->Assets->css('app') ?>
 </head>
 <body>
     <div class="content">
@@ -18,7 +18,7 @@
     </div>
     <?= $this->element('sidebar') ?>
     <?= $this->element('header') ?>
-    <?= $this->Assets->script('app') ?>
     <?= $this->fetch('script') ?>
+    <?= $this->Assets->script('app') ?>
 </body>
 </html>

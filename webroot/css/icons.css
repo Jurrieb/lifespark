@@ -23,15 +23,61 @@
 	-moz-osx-font-smoothing: grayscale;
 }
 
-.icon-mail:before {
-	content: "\e07c";
+.icon-directions_bike:before {
+	content: "\e1c9";
 }
-.icon-notifications:before {
-	content: "\e24a";
+.icon-restaurant_menu:before {
+	content: "\e1f9";
+}
+.icon-directions_run:before {
+	content: "\e1fe";
+}
+.icon-check:before {
+	content: "\e206";
+}
+.icon-menu:before {
+	content: "\e20e";
+}
+.icon-more_vert:before {
+	content: "\e210";
+}
+.icon-airline_seat_individual_suite:before {
+	content: "\e236";
+}
+.icon-group:before {
+	content: "\e245";
+}
+.icon-group_add:before {
+	content: "\e246";
+}
+.icon-public:before {
+	content: "\e258";
+}
+.icon-school:before {
+	content: "\e259";
+}
+.icon-whatshot:before {
+	content: "\e25b";
+}
+.icon-check_circle:before {
+	content: "\e281";
+}
+.icon-home:before {
+	content: "\e29e";
 }
 .icon-power_settings_new:before {
 	content: "\e2c0";
 }
+.icon-question_answer:before {
+	content: "\e2c3";
+}
 .icon-settings:before {
 	content: "\e2cb";
 }
+.icon-trending_up:before {
+	content: "\e2f7";
+}
+.icon-view_module:before {
+	content: "\e302";
+}
+

@@ -7,9 +7,9 @@
         <?= $this->fetch('title') ?>
     </title>
     <?= $this->Html->meta('icon') ?>
-    <?= $this->Assets->css('website') ?>
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
+    <?= $this->Assets->css('website') ?>
 </head>
 <body>
     <section class="backdrop">
