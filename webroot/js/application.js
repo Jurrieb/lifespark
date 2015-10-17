@@ -1,9 +1,8 @@
 $(function () {
-    $('document').on('click', '.dropup', function() {
-        console.log('yolo');
+    $(document).on('click', '.dropdown button', function() {
+        var self = $(this);
+        self.parent().find('.dropdown-menu').toggle();
     });
-
-
 });
 
 function timeAgo(date) {
