@@ -1,35 +1,36 @@
-msgid "Name"
-msgstr "Naam"
+msgid "logout"
+msgstr ""
 
 msgid "Email"
-msgstr "Emailadres"
+msgstr ""
+
+msgid "Send email"
+msgstr ""
+
+msgid "Name"
+msgstr ""
 
 msgid "Password"
-msgstr "Wachtwoord"
+msgstr ""
 
 msgid "Password confirm"
-msgstr "Wachtwoord herhalen"
-
-msgid "Login"
-msgstr "Inloggen"
+msgstr ""
 
 msgid "Register"
-msgstr "Registreren"
+msgstr ""
+
+msgid "Change password"
+msgstr ""
+
+msgid "Login with LifeSpark"
+msgstr ""
+
+msgid "Login"
+msgstr ""
 
 msgid "Register account"
-msgstr "Account registreren"
+msgstr ""
 
-msgid "Welcome {0}"
-msgstr "Welkom {0}"
+msgid "Password reset"
+msgstr ""
 
-msgid "The given combination of email and password is invalid"
-msgstr "De combinatie van email en wachtwoord is niet correct"
-
-msgid '{0} youre account has been registerd"
-msgstr "{0} je gegevens zijn opgeslagen"
-
-msgid 'Login with LifeSpark"
-msgstr "Inloggen op LifeSpark"
-
-msgid 'Password reset"
-msgstr "Wachtwoord vergeten"

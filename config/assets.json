@@ -7,6 +7,7 @@
                 "base.css",
                 "icons.css",
                 "application.css",
+                "profile.css",
                 "posts.css",
                 "friends.css",
                 "plugins.css"
@@ -29,7 +30,8 @@
                 "application.js",
                 "validate.js",
                 "posts.js",
-                "plugins.js"
+                "plugins.js",
+                "profile.js"
             ]
         },
         "website" : {

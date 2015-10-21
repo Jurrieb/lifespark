@@ -1,4 +1,3 @@
-<?php $currentUser = $this->request->session()->read('User'); ?>
 <header class="topbar">
 
 	<div class="active-user">
@@ -21,9 +20,15 @@
 
 	<nav class="menu">
 		<ul>
-            <li><a href="#"><span class="icon-question_answer"></span></a></li>
-            <li><a href="#"><span class="icon-public"></span></a></li>
             <?php
+            echo '<li>'.$this->Html->link(
+				    '<span class="icon-question_answer"></span>',
+				    ['controller' => 'Messages', 'action' => 'index'], ['escape' => false]
+				). '</li>';
+            echo '<li>'.$this->Html->link(
+				    '<span class="icon-public"></span>',
+				    ['controller' => 'Activity', 'action' => 'index'], ['escape' => false]
+				). '</li>';
             echo '<li>'.$this->Html->link(
 				    '<span class="icon-settings"></span>',
 				    ['controller' => 'Settings', 'action' => 'index'], ['escape' => false]

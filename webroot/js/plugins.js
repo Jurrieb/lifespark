@@ -1,0 +1,6 @@
+$(function()
+{
+    if($('.plugins').length) {
+ 
+    }
+});

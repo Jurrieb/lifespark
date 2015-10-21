@@ -21,11 +21,10 @@ class PagesController extends AppController
         $userId = $this->Authentication->getUser('id');
 
         $friendIds = $this->Friends->findIds($userId);
-        $rankingFriends = $friendIds[] = $userId;
         $friends = $this->Friends->findFriends($friendIds);
 
         $postUserIds = $friendsIds[] = $userId;
-        $posts = $this->Posts->findByUserIds($postUserIds);
+        $posts = $this->Posts->findByUserId($postUserIds);
 
         $this->set('posts', $posts);
         $this->set('friends', $friends);

@@ -6,19 +6,18 @@
         }?>
     </div>
 </div>
-    <div class="block">
-        <div class="create-post">
-            <?php
-                echo $this->Form->create(null);
-                echo $this->Form->textarea('content', ['placeholder' => 'Wat kun je mij vertellen?']);
-                echo $this->Form->button('Plaatsen', ['class' => 'button green']);
-                echo $this->Form->end();
-            ?>
-        </div>
-        <div class="posts">
-            <?php foreach($posts as $post) {
-                echo $this->element('post', ['post' => $post]);
-            }?>
-        </div>
+<div class="block">
+    <div class="create-post">
+        <?php
+            echo $this->Form->create(null);
+            echo $this->Form->textarea('content', ['placeholder' => 'Wat kun je mij vertellen?']);
+            echo $this->Form->button('Plaatsen', ['class' => 'button green']);
+            echo $this->Form->end();
+        ?>
+    </div>
+    <div class="posts" data-user-id="<?php echo $currentUser->id; ?>">
+        <?php foreach($posts as $post) {
+            echo $this->element('post', ['post' => $post]);
+        }?>
     </div>
 </div>

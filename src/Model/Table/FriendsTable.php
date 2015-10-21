@@ -49,7 +49,7 @@ class FriendsTable extends Table
 
     public function checkConnection($userId, $friendId)
     {
-        if($userId == $profileId) {
+        if($userId == $friendId) {
             return 'self';
         }
         $connection = $this->find()
@@ -71,6 +71,13 @@ class FriendsTable extends Table
 
         }
         return false;
+    }
+
+    public function isFriend($userId, $friendId) {
+        return  $this->find()
+            ->where(['friend_id' => $userId, 'user_id' => $friendId])
+            ->orWhere(['user_id' => $userId, 'friend_id' => $friendId])
+            ->count();
     }
 
     public function updateConnection($userId, $slug, $action)
@@ -100,7 +107,7 @@ class FriendsTable extends Table
             case 'break':
             break;
         }
-        
+
         return false;
     }
 }

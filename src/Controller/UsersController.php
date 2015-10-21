@@ -132,6 +132,7 @@ class UsersController extends AppController
 
     public function profile($slug = null)
     {
+        $this->viewBuilder()->layout('default');
         $user = $this->Users->findProfile($slug);
 
         if (!$user) {
@@ -139,12 +140,11 @@ class UsersController extends AppController
         }
 
         $this->Posts = $this->loadModel('Posts');
-        $this->layout = 'default';
 
         $connection = $this->Users->Friends->checkConnection($this->Authentication->getUser('id'), $user->id);
 
         if ($connection == 'self' || $connection == 'accepted') {
-            $posts = $this->Posts->findByUserIds($user->id);
+            $posts = $this->Posts->findByUserId($user->id);
         } else {
             $posts = [];
         }

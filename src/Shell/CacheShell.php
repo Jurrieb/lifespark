@@ -11,7 +11,7 @@ class CacheShell extends Shell
     public function main()
     {
         $this->out('Commands');
-        $this->out('- compress');
+        $this->out('- clear');
     }
 
     public function clear()
